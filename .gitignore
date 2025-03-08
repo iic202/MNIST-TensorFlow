@@ -1,0 +1,6 @@
+
+# Virtual Environment
+.venv/
+
+# Ignore src folder for now 
+src/

@@ -1,1 +1,1 @@
-# MNIST-TensorFlow
+# MNIST Neural Network with TensorFlow
