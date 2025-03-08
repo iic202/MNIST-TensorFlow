@@ -12,15 +12,15 @@ def load_and_preprocess_data():
     train_images = train_images.astype('float32') / 255.0
     test_images = test_images.astype('float32') / 255.0
     
-    # Reshape the images to flatten them (for sequential NN, not CNN)
+    # Reshape the images to flatten them
     train_images = train_images.reshape(-1, 28*28)
     test_images = test_images.reshape(-1, 28*28)
     
-    # Print dataset info
-    print(f"Training data shape: {train_images.shape}")
-    print(f"Training labels shape: {train_labels.shape}")
-    print(f"Test data shape: {test_images.shape}")
-    print(f"Test labels shape: {test_labels.shape}")
+    # Print dataset info if needed
+    # print(f"Training data shape: {train_images.shape}")
+    # print(f"Training labels shape: {train_labels.shape}")
+    # print(f"Test data shape: {test_images.shape}")
+    # print(f"Test labels shape: {test_labels.shape}")
     
     return (train_images, train_labels), (test_images, test_labels)
 
@@ -55,24 +55,16 @@ def evaluate_model(model, test_images, test_labels):
 
 def plot_training_history(history):
     """Plot training and validation accuracy/loss."""
-    plt.figure(figsize=(12, 4))
-    
-    plt.subplot(1, 2, 1)
+    plt.figure(figsize=(10, 6))
+
     plt.plot(history.history['accuracy'], label='Training Accuracy')
     plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
     plt.legend()
-    
-    plt.subplot(1, 2, 2)
-    plt.plot(history.history['loss'], label='Training Loss')
-    plt.plot(history.history['val_loss'], label='Validation Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.tight_layout()
-
     plt.savefig("figures/training_history.png")
+    plt.show()
+
 
 def plot_conffusion_matrix(model, test_images, test_labels):
     """Plot the confusion matrix for the model."""
@@ -89,6 +81,7 @@ def plot_conffusion_matrix(model, test_images, test_labels):
     plt.ylabel('True Label')
     plt.tight_layout()
     plt.savefig("figures/confusion_matrix.png")
+    plt.show()
 
 def plot_image(i, predictions_array, true_label, img):
     """Plot a test image along with its prediction."""
@@ -141,8 +134,8 @@ def main():
     # Plot confusion matrix
     plot_conffusion_matrix(model, test_images, test_labels)
     
-    # Visualize predictions
-    visualize_predictions(model, test_images, test_labels)
+    # Visualize predictions. This will plot the first 5 test images with their predictions
+    # visualize_predictions(model, test_images, test_labels)
 
 if __name__ == "__main__":
     main()
